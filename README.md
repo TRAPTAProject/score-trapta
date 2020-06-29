@@ -1,4 +1,4 @@
-score-trapta
+Projet lié à https://github.com/Bolbe/trapta
 
 Créer la table des utilisateurs dans une base de données Mysql. Le fichier de creation est usertable.sql
 
