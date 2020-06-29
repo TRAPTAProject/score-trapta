@@ -1,14 +1,5 @@
 # score-trapta
 
-Projet lié à 
-
-
-* https://github.com/Bolbe/trapta-server
-* https://github.com/Bolbe/traptatransfer
-* https://github.com/Bolbe/trapta-app
-* https://github.com/Bolbe/trapta-viewer
-* https://github.com/Bolbe/trapta-cloud
-
 Créer la table des utilisateurs dans une base de données Mysql. Le fichier de creation est usertable.sql
 
 Editer le fichier dbconnect.php, et remplacer la ligne:
