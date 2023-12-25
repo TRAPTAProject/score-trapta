@@ -85,7 +85,7 @@
 			if ($trend==-2) fwrite($file1, '<td><img src="./images/smiley-2.png"></td>');
 			else if ($trend==-1) fwrite($file1, '<td><img src="./images/smiley-1.png"></td>');
 			else if ($trend==1) fwrite($file1, '<td><img src="./images/smiley1.png"></td>');
-			else if ($trend==2) fwrite($file1, '<td><img src=".images/smiley2.png"></td>');
+			else if ($trend==2) fwrite($file1, '<td><img src="./images/smiley2.png"></td>');
 			else fwrite($file1, '<td></td>');
 			fwrite($file1, '</tr>');
 			$cutIndex++;

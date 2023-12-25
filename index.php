@@ -23,7 +23,7 @@
 		<table>
 			<tr><td style='padding:5px 20px 5px 15px'><a href="https://github.com/TRAPTAProject"><img src="./images/logo.png"></a></td>
 				<td width="100%">
-					<a href="https://github.com/TRAPTAProject"></a>
+					<a href="http://www.trapta.fr"></a>
 					<p id="lastupdate"></p>
 					<p id="lastsync"></p>
 				</td>
