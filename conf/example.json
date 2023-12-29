@@ -1,0 +1,19 @@
+{
+    "bdd": {
+        "url": "sqlite:$LIB_HOME/data/base.sqlite",
+        "login": "",
+        "password": ""
+    },
+    "log":{
+        "url": "sqlite:$LIB_HOME/data/log.sqlite",
+        "login": "",
+        "password": "",
+        "level":"DEBUG"
+    },
+    "accounts" : [
+        {
+            "login" : "test",
+            "password": "test"
+        }
+    ]
+}
