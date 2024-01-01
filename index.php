@@ -46,7 +46,7 @@
 		</ul>
 		
 		<div id="info"></div>
-		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script src="./bootstrap/bootstrap.min.js"></script>
 		<script src="./bootstrap/bootstrap-dialog.min.js"></script>
 		<script>
