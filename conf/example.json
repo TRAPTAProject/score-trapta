@@ -12,7 +12,7 @@
     },
     "accounts" : [
         {
-            "login" : "test",
+            "username" : "test",
             "password": "test"
         }
     ]
