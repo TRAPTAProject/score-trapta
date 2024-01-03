@@ -40,13 +40,14 @@ class BDD
         
         $query = "CREATE TABLE IF NOT EXISTS EVENTS(
             USERNAME varchar(20) NOT NULL,
-            EVENTDATE datetime NOT NULL,
-            EVENTNAME varchar(300) NOT NULL,
-            SHOW int(11) NOT NULL,
-            PRIMARY KEY (USERNAME, EVENTNAME) )";
+            EVENTDATE DATETIME NOT NULL,
+            EVENTNAME VARCHAR(300) NOT NULL,
+            SHOW BOOLEAN DEFAULT 'FALSE' NOT NULL,
+            PRIMARY KEY (USERNAME, EVENTDATE, EVENTNAME) )";
         $this->_pdo->query($query) or die("Error to CREATE EVENTS");
 
     }
+
 
 }
 

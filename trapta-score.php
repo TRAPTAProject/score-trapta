@@ -28,8 +28,9 @@ class TraptaScore
 
         $this->_helper_authent = new HelperAuthent( $this->_configuration );
 
-        $this->_ctrl_upload_pdf = new ControlerUploadPdf( $this->_configuration, $this->_helper_authent );
-        $this->_ctrl_upload_score = new ControlerUploadScore( $this->_configuration, $this->_helper_authent );
+        $this->_ctrl_upload_pdf = new ControlerUploadPdf( $this->_configuration, $this->_bdd );
+        $this->_ctrl_upload_score = new ControlerUploadScore( $this->_configuration, $this->_bdd );
+        $this->_ctrl_show = new ControlerUploadScore( $this->_configuration, $this->_bdd );
     }    
 
     public function print_logs ($div=false){
