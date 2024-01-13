@@ -11,7 +11,7 @@
 				<div class="display-4">
 					<h1 >
 						<a style="margin-right: 20px" href="/">
-						<img src="../images/logo.png" width="70" height="70"></a>TRAPTA	
+						<img src="images/logo.png" width="70" height="70"></a>TRAPTA
 					</h1>
 				</div>
 				<div class="display-4">
