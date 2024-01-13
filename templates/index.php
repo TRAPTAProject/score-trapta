@@ -1,59 +1,69 @@
 <?php
 	$displayType = 1;
-	$username = basename(getcwd());
-	$eventname = "Event name";
-	if (isset($_GET['displayType'])) $displayType = $_GET['displayType'];
-	include '../dbconnect.php';
-  	$result = mysqli_query($db,"SELECT * FROM `usertable` WHERE `username`='".$username."'");
-  	$eventname = "Event";
-  	$date = "Date";
-	if ($row = mysqli_fetch_array($result)) {
-		$eventname = $row['eventname'];
-		$date = $row['eventdate'];
-	}
-	include '../dbdisconnect.php';
+	if (isset($_GET['displayType']))
+        $displayType = $_GET['displayType'];
+
+	include 'getevent.php';
 ?>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="http://score.trapta.eu/bootstrap/bootstrap.min.css" rel="stylesheet">
-		<link href="http://score.trapta.eu/bootstrap/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	</head>
 	<body onload="checkTimestamp();setInterval('checkTimestamp()', 15000)">
-		<table>
-			<tr><td style='padding:5px 20px 5px 15px'><a href="http://score.trapta.eu"><img src="http://score.trapta.eu/images/logo.png"></a></td>
-				<td width="100%">
-					<a href="http://score.trapta.eu"></a>
-					<p id="lastupdate"></p>
-					<p id="lastsync"></p>
-				</td>
-			</tr>
-		</table>
-
-		<h1><?php echo $eventname.' - '.date("j F Y, H:i", strtotime($date)); ?></h1>
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 		
-		<ul class="nav nav-pills">
+
+
+		<table>
+			<tbody>
+				<tr>
+					<td style='padding:5px 20px 5px 15px'><a href="/"><img src="../../images/logo.png"></a></td>
+					<td width="100%">
+						<a href="/"></a>
+						<p id="lastupdate"></p>
+						<p id="lastsync"></p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<h1 class="p-3 mb-2 bg-secondary text-white"><?php echo "$eventname - ".date("j F Y, H:i", strtotime($date)); ?></h1>
+
+		
+		<ul class="nav  nav-pills">
 			<?php
-				if ($displayType==0) echo '<li class="active"><a href="#">Positions</a></li>';
-				else echo '<li><a href="index.php?displayType=0">Positions</a></li>';
-					if ($displayType==1) echo '<li class="active"><a href="#">Tir individuels</a></li>';
-				else echo '<li><a href="index.php?displayType=1">Tir individuels</a></li>';
-				if ($displayType==3) echo '<li class="active"><a href="#">Par &eacute;quipes</a></li>';
-				else echo '<li><a href="index.php?displayType=3">Par &eacute;quipes</a></li>';
-				if ($displayType==2) echo '<li class="active"><a href="#">Matches</a></li>';
-				else echo '<li><a href="index.php?displayType=2">Matches</a></li>';
+				if ($displayType==0)
+					echo '<li class="nav-item"><a class="nav-link active" href="#">Positions</a></li>';
+				else
+					echo '<li class="nav-item"><a class="nav-link" href="index.php?displayType=0">Positions</a></li>';
+				if ($displayType==1)
+					echo '<li class="nav-item"><a class="nav-link active" href="#">Tir individuels</a></li>';
+				else
+					echo '<li class="nav-item"><a class="nav-link" href="index.php?displayType=1">Tir individuels</a></li>';
+				if ($displayType==3)
+					echo '<li class="nav-item"><a class="nav-link active" href="#">Par &eacute;quipes</a></li>';
+				else
+					echo '<li class="nav-item"><a class="nav-link" href="index.php?displayType=3">Par &eacute;quipes</a></li>';
+				if ($displayType==2)
+					echo '<li class="nav-item"><a class="nav-link active" href="#">Matches</a></li>';
+				else 
+					echo '<li class="nav-item"><a class="nav-link" href="index.php?displayType=2">Matches</a></li>';
 			?>
-			<li><a href="pdfscorecards/scorecards.pdf"><img src="http://score.trapta.eu/images/pdf.png">&nbsp;&nbsp;Feuilles de scores individuelles finales</a></li>
+			<li class="nav-item">
+				<a class="nav-link" href="pdfscorecards/scorecards.pdf">
+					<img src="../../images/pdf.png">&nbsp;&nbsp;Feuilles de scores individuelles finales</a>
+			</li>
 		</ul>
 		
 		
 	   		
 		<div id="info"></div>
-		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-		<script src="http://score.trapta.eu/bootstrap/bootstrap.min.js"></script>
-		<script src="http://score.trapta.eu/bootstrap/bootstrap-dialog.min.js"></script>
 		<script>
 			<?php
 				if ($displayType==0) echo 'datafilename = "positions.html";';

@@ -1,0 +1,20 @@
+= score-trapta
+
+== Utilisation
+
+Pour déployer TRAPTA-Score, il suffit de copier le contenue de ce répertoire dans votre espace d'hebergement.
+
+Seul le fichier users.json est à modifier pour y changer les valeurs de login / mot de passe des differents comptes a autoriser sur l'instance de TRAPTA-Score.
+
+Idéalement, l'accés à ce fichier doit être bloqué par un htaccess par exemple.
+
+Les prérequis techniques sont les suivants :
+
+* PHP 7.4
+* PHP-Sqlite3
+
+Cette nouvelle version de TRAPTA score corrige les problèmes suivants :
+
+* Compatibilité avec HTTPS
+* Plus de necessiter de disposer d'une base mysql
+
