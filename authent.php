@@ -1,6 +1,8 @@
 <?php
 
 
+    include 'conf.php';
+
     $_password = "";
     $username = "";
     if (isset($_REQUEST['password'])) $_password = $_REQUEST['password'];
@@ -11,15 +13,12 @@
         die();
     }
 
-    $_jsonStr = file_get_contents("users.json");
-    $_config = json_decode($_jsonStr, true);
-
-    if(!isset($_config['accounts'][$username])) {
+    if(!isset($accounts[$username])) {
         header('HTTP/1.0 401 Unauthorized');
         die();
     }
     
-    if($_config['accounts'][$username] != $_password) {
+    if($accounts[$username] != $_password) {
         header('HTTP/1.0 401 Unauthorized');
         die();
     }
