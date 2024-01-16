@@ -28,6 +28,9 @@
     if (!file_exists("data/$username")) {
         mkdir("data/$username", 0777, false);
     }
+    if (!file_exists("data/$username/pdfscorecards")) {
+        mkdir("data/$username/pdfscorecards", 0777, false);
+    }
     if (!file_exists("data/$username/scorecards")) {
         mkdir("data/$username/scorecards", 0777, false);
     }

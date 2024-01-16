@@ -1,18 +1,116 @@
 = score-trapta
 
-== Utilisation
+score-trapta est l'outil web qui permet d'auto héberger les services TRAPTA suivant :
+* Visualisation en direct des scores des compétitions géré avec le Système trapta
+* Hébergement des feuilles de scores PDF des concours
 
-Pour déployer TRAPTA-Score, il suffit de copier le contenue de ce répertoire dans votre espace d'hebergement.
 
-Seul le fichier conf.php est à modifier pour y changer les valeurs de login / mot de passe des differents comptes a autoriser sur l'instance de TRAPTA-Score.
+Cette application PHP a pour but d'être auto héberger par les clubs / CD / CR pour que chacun puisse être autonomes quand a l'utilisation du systèmes TRAPTA.
+
+
+== Release-Note
+
+=== version 2
+La version 2 de trapta-score (disponible depuis Janvier 2024) entraine quelques changements concernant la version précédents. Ces changements sont les suivants :
+
+* Il n'est plus necessaire de disposer d'une base de données MySQL pour héberger trapta-score Cette base de données a été remplacer par 2 éléments :
+** Un fichier ```conf.php``` disponible a la racine de l'espace trapta-score qui va concenir liste des utilisateurs et leur mot de passe
+** Une base de données SQLite automatiquement créer et géré par trapta-score (cette base ne necessite aucune intervention humaine) qui va contenir la liste des compétitions en cours.
+* Les comptes utilisateurs et leur mot de passe ne sont plus héberger dans la base de données mais dans le nouveau fichier ```conf.php```.
+* Les espaces utilisateurs ne sont polus créer à la racine de l'espace d'hébergement, mais dans le répertoire ```data```.
+
+La version 2 de score trapta rend compatible l'utilisation de ```https```.
+
+[WARNING]
+====
+Il est conseillé d'utilisé ```https``` pour vios déploiement et publication avec TRAPTA-Cloud. En effet, les login / mot de passe sont envoyer dans les requetes web faites par TRAPTA Cloud. En cas d'utilisation de ```http```, ces informations sensible vont transité sur le réseau de manière non sécurisé et pourraient être compromise. 
+
+Trapta étant ce qu'il est, les conséquences d'une fuite de username / password de trapta reste mineure, et sans risque pour vos hébergements. Cela reste malgré tout un risque présent.
+====
+
+
+== Prérequis
 
 Les prérequis techniques sont les suivants :
 
 * PHP 7.4
 * PHP-Sqlite3
 
-Cette nouvelle version de TRAPTA score corrige les problèmes suivants :
+== Utilisation
 
-* Compatibilité avec HTTPS
-* Plus de necessiter de disposer d'une base mysql
+=== Etape 1 : Déploiement de trapta-score
+
+Le déploiement de trapta-score ce fait en copiant l'intégralité du dépot actuel sur votre hébergement. Les fichiers peuvent être déposer par FTP ou tout autre moyen, soit à la racine de votre hébergement, soit dans un sous répertoire
+
+=== Etape 2 : Configuration des utilisateurs.
+
+La liste des utilisateurs est configuré dans le fichier ```conf.php``` à la racine de l'espace de trapta-score. La liste des utilisateur est définie comme une variable https://www.php.net/manual/fr/language.types.array.php[php de type tableau]
+
+Par défaut, le fichier est fournis avec un exemple de 2 utilisateurs :
+* L'utilisateur ```username``` avec le mot de passe ```password```
+* L'utilisateur ```bob``` avec le mot de passe ```supermotdepassesecret```
+
+Ces 2 utilisateurs d'exemple doivent biensur être supprimé pour être remplacé per vos utilisateurs réels.
+
+[WARNING]
+====
+Attention à la validité du fichier conf.php, chaque définition d'utilisateur doit être séparé par une virgule ','.
+====
+
+A cette étape, vos utilisateurs sont déclaré, mais leur espace de stockage des scores n'est pas encore initialisé. La création de cet espace ce fera automatiquement à la publication de leur prochaine compétition.
+
+[NOTE]
+====
+Il est possible de forcer la création de l'espace de travail en apellant la page suivante :
+```
+https://<votre hébergement>/<emplacement de trapta-score>/authent.php?username=<username>&password=<password>
+```
+====
+
+=== Etape 3 : Publication d'une compétition
+
+Tant que aucune compétition n'a été pulbié pour un utilisateurs, sont espace compétition restera vide.
+
+. A la première publication de compétition avec trapta-score, l'espace sera initialisé.
+
+. Les positions seront visible à partir du moment ou trapta-server sera lancé et peuplé avec des archers.
+
+. Les scores seronts visible à partir du moment ou les première flêches seront saisie dans l'application trapta android.
+
+[NOTE]
+====
+La base de données interne SQLite est stocké sour forme de fichier à l'emplacement```data/data.sqlite3.db```.
+
+Il n'est *pas necessaire* d'initialiser cette base de données manuellement, elle est automatiquement créer et géré par trapta-score.
+====
+
+
+== Fonctionnement
+
+=== Points d'entrée
+
+Les différents points d'entrée de score trapta utilisé par trapta-cloud sont les suivants :
+
+* ```index.php``` : Cette page est la page d'acceuil de trapta-score qui permet de visualiser les différents concours publiés sur l'instance de trapta-score. Cette page fait appel à la base de donnée interne pour visualiser les différents concours publiés.
+* ```show.php``` : Cette page est utilisé par trapta-cloud quand le boutton 'Publier' est utilisé. Cette page permet de stoquer dans la base de donnée interne les informations de publication d'une compétition d'un utilisateur.
+* ```hide.php``` : Cette page est utilisé par trapta-cloud quand le boutton 'Cacher' est utilisé. Cette page permet de mettre à jour dans base de donnée interne les informations de publication d'une compétition d'un utilisateur pour la cacher.
+* ```updatepositions.php``` : Cette page est utilisé par trapta-cloud lorsque trapta-server à émit une demande de mise à jour des positions. Lorsque une position d'archer est saisie ou mise à jour sur trapta-serveur, la nouvelle liste des positions est envoyé à trapta-cloud qui va propager cette nouvelle liste à trapta-score par ce point d'entrée. Sur la réception de cet événement, trapta-score va générer la page html ```data/<username>/positions.html```. Cette page sera ensuite importé par la page ```data/<username>/index.php``` pour être affiché comme étant la liste des positions des archers.
+* ```updateranking.php``` : Cette page est utilisé par trapta-cloud lorsque trapta-server à émit une demande de mise à jour des scores. Lorsque une flêche d'archer est saisie ou mise à jour sur trapta-serveur, la nouvelle liste des scores est envoyé à trapta-cloud qui va propager cette nouvelle liste à trapta-score par ce point d'entrée. Sur la réception de cet événement, trapta-score va générer la page html ```data/<username>/positions.html```. Cette page sera ensuite importé par la page ```data/<username>/index.php``` pour être affiché comme étant la liste des scores de la compétition. Ce point d'entrée va également généré le fichier ```data/<username>/teams.html``` pour les scores d'équipes et l'ensemble des feuilles de marques ```data/<username>/scorecards/scorecard<id archer>.html```. Ces derniers fichiers seront aussi importé par ```data/<username>/index.php``` pour être affiché.
+* ```updatematches.php``` : Cette page est utilisé par trapta-cloud lorsque trapta-server à émit une demande de mise à jour des matches. Lorsque un match est saisie ou mise à jour sur trapta-serveur, la nouvelle liste des matchs est envoyé à trapta-cloud qui va propager cette nouvelle liste à trapta-score par ce point d'entrée. Sur la réception de cet événement, trapta-score va générer la page html ```data/<username>/matches.html```. Cette page sera ensuite importé par la page ```data/<username>/index.php``` pour être affiché comme étant la liste des matches de la compétition.
+* ```uploadpdf.php``` : 
+* ```data/<username>/index.php``` : 
+
+
+=== Utilisation de la base de données
+
+
+=== Génération des pages de données
+
+== Autres procédures
+
+=== Suppression d'un compte utilisateur
+
+. Supression de l'accés
+. Suppression de l'entrée dans la base
+. Suppression des données
 

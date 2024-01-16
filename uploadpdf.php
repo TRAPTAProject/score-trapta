@@ -25,7 +25,7 @@
 			($_FILES["fileToUpload"]["size"] < 5000000) && 
 			($extension=="pdf")) {
 
-			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $username."/pdfscorecards/scorecards.pdf")) {
+			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], "data/$username/pdfscorecards/scorecards.pdf")) {
 				die("Le fichier a ete mis en ligne.<br>Vous pouvez le retrouver sur votre page de resultats.");
 		
 			} else {
