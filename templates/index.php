@@ -33,7 +33,7 @@
 			</tbody>
 		</table>
 		
-		<h1 class="p-3 mb-2 bg-secondary text-white"><?php echo "$eventname - ".date("j F Y, H:i", strtotime($date)); ?></h1>
+		<h1 class="p-3 mb-2 bg-secondary text-white"><?php echo "$eventname - ".date("d M Y, H:i", strtotime($date)); ?></h1>
 
 		
 		<ul class="nav  nav-pills">
