@@ -63,7 +63,7 @@
       					<div class="form-group">
       						<label for="password" class="col-lg-2 control-label">Mot de passe</label>
       						<div class="col-lg-8">
-        						<input type="password" class="form-control" id="password" name="password" value="<?php echo $password; ?>">
+        						<input type="password" class="form-control" id="password" name="password" value="<?php echo $_REQUEST['password']; ?>">
         					</div>
         				</div>
         				<div class="form-group">
