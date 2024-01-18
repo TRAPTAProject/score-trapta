@@ -53,10 +53,14 @@
 				else 
 					echo '<li class="nav-item"><a class="nav-link" href="index.php?displayType=2">Matches</a></li>';
 			?>
+
+			
+			<?php if ( file_exists(dirname(__FILE__)."/pdfscorecards/scorecards.pdf") ) {?>
 			<li class="nav-item">
 				<a class="nav-link" href="pdfscorecards/scorecards.pdf">
 					<img src="../../images/pdf.png">&nbsp;&nbsp;Feuilles de scores individuelles finales</a>
 			</li>
+			<?php } ?>
 		</ul>
 		
 		
