@@ -21,7 +21,7 @@
 		<table>
 			<tbody>
 				<tr>
-					<td style='padding:5px 20px 5px 15px'><a href="/"><img src="../../images/logo.png"></a></td>
+					<td style='padding:5px 20px 5px 15px'><a href="../../"><img src="../../images/logo.png"></a></td>
 					<td width="100%">
 						<a href="/"></a>
 						<p id="lastupdate"></p>
