@@ -26,6 +26,7 @@
 			($extension=="pdf")) {
 
 			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], "data/$username/pdfscorecards/scorecards.pdf")) {
+				copy("data/$username/pdfscorecards/scorecards.pdf", "data/$username/pdfscorecards/".date('Ymd')."_scores.pdf");
 				die("Le fichier a ete mis en ligne.<br>Vous pouvez le retrouver sur votre page de resultats.");
 		
 			} else {
