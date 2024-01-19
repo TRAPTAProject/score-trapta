@@ -38,7 +38,4 @@
     if (!file_exists("data/$username/index.php")) {
         copy("templates/index.php", "data/$username/index.php");
     }
-    if (!file_exists("data/$username/getevent.php")) {
-        copy("templates/getevent.php", "data/$username/getevent.php");
-    }
 ?>

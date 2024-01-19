@@ -3,7 +3,19 @@
 	if (isset($_GET['displayType']))
         $displayType = $_GET['displayType'];
 
-	include 'getevent.php';
+	$username = basename(getcwd());
+	$eventname = "Event name";
+
+	include '../../db.php';
+	$db = db_connect();
+		$result = $db->query("SELECT * FROM `usertable` WHERE `username`='".$username."'");
+		$eventname = "Event";
+		$date = "Date";
+	if ($row = $result->fetchArray()) {
+		$eventname = $row['eventname'];
+		$date = $row['eventdate'];
+	}
+	db_disconnect($db)
 ?>
 <html>
 	<head>

@@ -2,7 +2,8 @@
 
 	include 'authent.php';
 
-	include 'dbconnect.php';
+	include 'db.php';
+	$db = db_connect();
 
 	// hide event
 	$db->query("UPDATE `usertable` SET `show`=0 WHERE `username`='$username'");
@@ -20,6 +21,6 @@
 	fwrite($file, "Pas d'information sur le classement par équipe.");
 	fclose($file);	
 	
-	include 'dbdisconnect.php';
+	db_disconnect($db)
 
 ?>
