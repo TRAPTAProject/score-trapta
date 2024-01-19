@@ -34,8 +34,4 @@
     if (!file_exists("data/$username/scorecards")) {
         mkdir("data/$username/scorecards", 0777, false);
     }
-        
-    if (!file_exists("data/$username/index.php")) {
-        copy("templates/index.php", "data/$username/index.php");
-    }
 ?>

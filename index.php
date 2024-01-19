@@ -31,7 +31,7 @@
 			while($row = $result->fetchArray())   {
 				if ($row['show']==1) {
 					echo "<h3 >".date("d M Y, H:i", strtotime($row['eventdate']))." :</h3>";
-  					echo '<a href="data/'.$row['username'].'" class="btn btn-secondary btn-lg btn-block">'.$row['eventname'].'</a>';
+  					echo '<a href="user.php?username='.$row['username'].'" class="btn btn-secondary btn-lg btn-block">'.$row['eventname'].'</a>';
   					echo "Gestion TRAPTA : ".$row['username'];
   					echo "<br><br><br>";
   				}
