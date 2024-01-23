@@ -1,6 +1,4 @@
 <?php
-
-
     include 'conf.php';
 
     $_password = "";

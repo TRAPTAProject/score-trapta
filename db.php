@@ -1,6 +1,4 @@
 <?php
-
-
 	function db_connect(){
 		if(!class_exists('SQLite3'))
 			die('SQLite 3 NOT supported.');
@@ -26,5 +24,4 @@
 	function db_disconnect($db){
 		$db->close();
 	}
-	
 ?>

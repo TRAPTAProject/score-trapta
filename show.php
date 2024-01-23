@@ -6,6 +6,7 @@
 	$eventdate = $_POST['eventdate'];
 
 	include 'db.php';
+	
 	$db = db_connect();
   	
 	// show event

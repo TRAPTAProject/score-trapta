@@ -1,8 +1,8 @@
 <?php
 
 	include 'authent.php';
-
 	include 'db.php';
+	
 	$db = db_connect();
 
 	// hide event
