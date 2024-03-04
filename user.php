@@ -69,7 +69,7 @@
 			
 			<?php if ( file_exists(dirname(__FILE__)."/data/$username/pdfscorecards/scorecards.pdf") ) {?>
 			<li class="nav-item">
-				<a class="nav-link" href="/data/<?php echo $username ?>/pdfscorecards/scorecards.pdf">
+				<a class="nav-link" href="./data/<?php echo $username ?>/pdfscorecards/scorecards.pdf">
 					<img src="images/pdf.png">&nbsp;&nbsp;Feuilles de scores individuelles finales</a>
 			</li>
 			<?php } ?>
@@ -127,7 +127,7 @@
 			function checkTimestamp() {
 				
 				var currentdate = new Date();
-				$.getJSON("/data/<?php echo $username ?>/timestamp.json?"+currentdate.getTime(), function(data) {
+				$.getJSON("./data/<?php echo $username ?>/timestamp.json?"+currentdate.getTime(), function(data) {
 					if (data.timestamp!=mytimestamp) {
 						mytimestamp = data.timestamp;
 						document.getElementById('lastupdate').innerHTML="Mise à jour: "+formatDate(mytimestamp*1000);
@@ -143,7 +143,7 @@
 				
 				var currentdate = new Date();
 				$.ajax({
-				  	url: "data/<?php echo $username ?>/"+datafilename+"?"+currentdate.getTime(),
+				  	url: "./data/<?php echo $username ?>/"+datafilename+"?"+currentdate.getTime(),
   					data: {},
   					success: function(oData) {
   						document.getElementById('info').innerHTML=oData;
@@ -157,7 +157,7 @@
 				var currentdate = new Date();
 
 				$("#SCORECARD-TITLE").load(name);
-				$("#SCORECARD-CONTENT").load("data/<?php echo $username ?>/"+scorecard+"?"+currentdate.getTime());
+				$("#SCORECARD-CONTENT").load("./data/<?php echo $username ?>/"+scorecard+"?"+currentdate.getTime());
 				var myModal = new bootstrap.Modal(document.getElementById('SCORECARD-MODAL'));
 				myModal.show();
 
